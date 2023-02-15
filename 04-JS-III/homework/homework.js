@@ -28,7 +28,7 @@ function incrementarPorUno(array) {
   // Tu código:
   var nuevoArray = [];
   for(var i = 0; i < array.length; i++) {
-    nuevoArray[i] = array[i] + 1;
+    nuevoArray.push(array[i]+1)
   }
 
   return nuevoArray;
@@ -39,8 +39,7 @@ function agregarItemAlFinalDelArray(array, elemento) {
   // Añade el "elemento" al final del array
   // y devuelve el array
   // Tu código:
-  array[array.length] = elemento;
-  return array;
+  return array.push(elemento);
 }
 
 
@@ -94,7 +93,11 @@ function promedioResultadosTest(resultadosTest) {
   // "resultadosTest" debe ser una matriz de enteros (int/integers)
   // Itera (en un bucle) los elementos del array, calcula y devuelve el promedio de puntajes
   // Tu código:
-  return agregarNumeros(resultadosTest) / resultadosTest.length;
+ var acumulador = 0
+ for(var i= 0; i< resultadosTest.length; i++){
+  acumulador = acumulador + resultadosTest[i]
+ }
+ return acumulador/ resultadosTest.length;
 }
 
 
@@ -102,7 +105,7 @@ function numeroMasGrande(numeros) {
   // "numeros" debe ser una matriz de enteros (int/integers)
   // Devuelve el número más grande
   // Tu código:
-  var maximo = numeros[0];
+  var maximo = 0;
   for(var i = 1; i < numeros.length; i++) {
     if(numeros[i] > maximo) { 
       maximo = numeros[i];
@@ -116,22 +119,27 @@ function multiplicarArgumentos() {
   // Usa la palabra clave `arguments` para multiplicar todos los argumentos y devolver el producto
   // Si no se pasan argumentos devuelve 0. Si se pasa un argumento, simplemente devuélvelo
   // Escribe tu código aquí:
-  if(arguments.length < 1) return 0;
-  var total = 1;
-  for(var i = 0; i < arguments.length; i++) {
-    total = total * arguments[i];
+  var acumulador = 1
+  if (arguments.length === 0) {
+    return 0;
+  }else if (arguments.length === 1){
+    return arguments[0]
+  }else {
+    for(var i= 0; i < arguments.length; i++){
+      acumulador = acumulador * arguments[i]
+    }
   }
-  return total;
+  return acumulador;
 }
 
 
 function cuentoElementos(arreglo){
   //Realiza una función que retorne la cantidad de los elementos del arreglo cuyo valor es mayor a 18.
   //Escribe tu código aquí
-  let contador = 0;
-  for (let i = 0; i < arreglo.length ; i++) {
-    if(arreglo[i] > 19){
-      contador++
+ var contador = 0;
+  for (var i = 0; i < arreglo.length ; i++) {
+    if(arreglo[i] > 18){
+      contador = contador + 1
     }
   }
   return contador
@@ -155,11 +163,13 @@ function empiezaConNueve(n) {
   //Desarrolle una función que recibe como parámetro un número entero n. Debe retornar true si el entero 
   //inicia con 9 y false en otro caso.
   //Escribe tu código aquí
-  let num = n.toString()
-  if(num.charAt(0) === "9"){
+  var num = n.toString();
+  if(num[0] === "9"){
     return true
+  }else{
+    return false;
   }
-  return false
+
 }
 
 
@@ -182,16 +192,16 @@ function mesesDelAño(array) {
   //Si alguno de los meses no está, devolver: "No se encontraron los meses pedidos"
   // Tu código:
   var nuevoArray = [];
-  for(let i= 0; i<array.length; i++) {
+  for(var i= 0; i< array.length; i++) {
     if(array[i] === "Enero" || array[i] === "Marzo" || array[i] === "Noviembre") {
       nuevoArray.push(array[i]);
     }
   }
-  if(nuevoArray.length < 3) {
-    return "No se encontraron los meses pedidos";
+  if(nuevoArray.length === 3) {
+    return nuevoArray;
   }
   else {
-      return nuevoArray;
+      return "No se encontraron los meses pedidos" ;
   }
 }
 
@@ -201,7 +211,7 @@ function mayorACien(array) {
   //valores mayores a 100 (no incluye el 100). Finalmente devolver el nuevo array.
   // Tu código:
   var nuevoArray = [];
-  for(let i= 0; i < array.length; i++) {
+  for(var i= 0; i < array.length; i++) {
     if(array[i] > 100) {
       nuevoArray.push(array[i]);
     }
@@ -227,7 +237,7 @@ function breakStatement(numero) {
       array.push(suma);
     }
   }
-  if(i < 10) {
+  if(array.length < 10) {
     return 'Se interrumpió la ejecución';
   }
   else {
@@ -246,8 +256,9 @@ function continueStatement(numero) {
   var array = [];
   var suma = numero;
   for(var i= 0; i<10; i++) {
-    if(i === 5) continue;
-    else {
+    if(i === 5) {
+      continue;
+    }else{
       suma = suma + 2;
       array.push(suma);
     }
